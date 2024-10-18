@@ -4,15 +4,12 @@ import {
     createMetadataAccountV3, 
     CreateMetadataAccountV3InstructionAccounts, 
     CreateMetadataAccountV3InstructionArgs,
-    DataV2Args,
-    findMetadataPda
+    DataV2Args
 } from "@metaplex-foundation/mpl-token-metadata";
 import { createSignerFromKeypair, signerIdentity, publicKey } from "@metaplex-foundation/umi";
-import bs58 from "bs58";
-
+import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 // Define our Mint address
-const mint = publicKey("2AmbUamnbdhEnbStHZNpp7GqSwn1nW9wjSEV6RAJCEsU")
-const METADATA_PROGRAM_ID = publicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
+const mint = publicKey("CE34XywzxVNYhHk3eUa39YTzDfPGcwYXJwyosQu5Ajaa")
 
 // Create a UMI connection
 const umi = createUmi('https://api.devnet.solana.com');
@@ -20,38 +17,36 @@ const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);
 umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
 
-// Derive the Metadata PDA using the mint address and metadata program ID
-const metadataPDA = findMetadataPda({
-    mint: mint,
-    programId: METADATA_PROGRAM_ID,
-});
-
 (async () => {
     try {
         // Start here
         let accounts: CreateMetadataAccountV3InstructionAccounts = {
-            metadata: keypair.publicKey,
-            mint: mint,
-            mintAuthority: signer,
-            payer: signer,
-            updateAuthority: signer.publicKey
-
+            mint:mint,
+            mintAuthority:signer
         }
 
         let data: DataV2Args = {
-            name: "CollectiFi",
-            symbol: "CiFi",
-            uri: "ts/cluster1/spl_metadata.json",
+            name: "CollectiSciFi",
+            symbol: "CiSFi",
+            uri: "/home/rammo/TURBIN3/solana-starter/assets/img.png",
             sellerFeeBasisPoints: 500,
-            creators: null,
+            creators: [
+                {
+                    address: signer.publicKey,
+                    verified: true,
+                    share: 100,
+                }
+            ],
             collection: null,
             uses: null
+
         }
 
         let args: CreateMetadataAccountV3InstructionArgs = {
-            data: data,
+            data,
             isMutable: true,
-            collectionDetails: null
+            collectionDetails: null,
+
         }
 
         let tx = createMetadataAccountV3(
