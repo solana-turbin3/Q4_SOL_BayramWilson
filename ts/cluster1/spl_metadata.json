@@ -1,0 +1,23 @@
+{
+    "name": "CollectiFi Token2",
+    "symbol": "CiFi2",
+    "description": "The CollectiFi token is used to power the CollectiFi platform for NFT collectibles and other digital assets.",
+    "image": "/home/rammo/TURBIN3/solana-starter/assets/img.png",
+    "decimals": 6,
+    "external_url": "https://yourproject.com",
+    "attributes": [
+      {
+        "trait_type": "Type",
+        "value": "Utility Token"
+      }
+    ],
+    "properties": {
+      "creators": [
+        {
+          "address": "YourCreatorWalletPublicKey",
+          "share": 10000000
+        }
+      ]
+    }
+  }
+  
