@@ -2,7 +2,7 @@ import prompt from 'prompt'
 import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js"
 
 //Create a Solana devnet connection to claim 2 devnet SOL tokens
-const connection = new Connection("https://api.devnet.solana.com");
+const connection = new Connection("https://api.testnet.solana.com");
 
 (async () => {
     // Start our prompt
