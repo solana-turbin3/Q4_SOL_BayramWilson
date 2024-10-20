@@ -1,3 +1,4 @@
 *wallet.json
 node_modules
 yarn.lock
+ts/test-ledger/rocksdb/000062.log
